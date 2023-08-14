@@ -1,16 +1,11 @@
-п»їusing System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TriggerSensor : MonoBehaviour {
-	public float timer = 3;
-	public Sprite sprite;
-	public Image loot, vesch;
-	public string masage;
 	public float spector = 20;
 	public Transform cam;
-	public AudioClip clip;
 	public bool activate;
 	private bool activ;
 	private float vzglyad;
@@ -23,22 +18,10 @@ public class TriggerSensor : MonoBehaviour {
 			var looker = transform.position - cam.position;
 			vzglyad = Quaternion.Angle (cam.rotation, Quaternion.LookRotation(looker));
 			if (vzglyad <= spector) {
-				if (loot != null) {
-					vesch = Instantiate (loot);
-					vesch.transform.SetParent(LootElement.regit.inventar, false);
-					vesch.sprite = sprite;
-					vesch.name = gameObject.name;
-				}
+			//В этой строке, вызываешь то, что должно произойти при взгляде на триггер
 				activate = true;
 				activ = false;
-				if (masage != null) {
-					SubTitres.rid.tim = timer;
-					SubTitres.rid.image.enabled = true;
-					SubTitres.rid.not = masage;
-				}
-				if (clip != null) {
-					SoundMaster.regit.clip = clip;
-				}
+
 			}
 		} else {
 			activate = false;

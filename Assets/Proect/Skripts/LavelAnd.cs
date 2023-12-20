@@ -12,8 +12,6 @@ public class LavelAnd : MonoBehaviour {
 	}
 
 	void Update () {
-		if (sensor.activate) {
-			SceneManager.LoadScene (level);
-		}
+
 	}
 }

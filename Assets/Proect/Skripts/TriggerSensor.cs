@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class TriggerSensor : MonoBehaviour {
 	public float spector = 20;
 	public Transform cam;
-	public bool activate;
+    public UnityEvent touch;
+
 	private bool activ;
 	private float vzglyad;
 
@@ -18,14 +20,10 @@ public class TriggerSensor : MonoBehaviour {
 			var looker = transform.position - cam.position;
 			vzglyad = Quaternion.Angle (cam.rotation, Quaternion.LookRotation(looker));
 			if (vzglyad <= spector) {
-			//В этой строке, вызываешь то, что должно произойти при взгляде на триггер
-				activate = true;
 				activ = false;
-
+                touch.Invoke();
 			}
-		} else {
-			activate = false;
-		}
+		} 
 	}
 	void OnTriggerEnter(Collider oser){
 		if (oser.tag == "Player") {

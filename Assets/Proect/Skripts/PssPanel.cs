@@ -31,36 +31,6 @@ public class PssPanel : MonoBehaviour {
 	}
 
 	void Update () {
-		if (activ) {
-			if (not == password) {
-				not = 0;
-				activ = false;
-				SoundMaster.regit.clip = ok;
-				SubTitres.rid.image.enabled = true;
-				SubTitres.rid.not = okay;
-				door.locked = false;
-			} else {
-				if (not != 0) {
-					activ = false;
-					SoundMaster.regit.clip = coll;
-					SubTitres.rid.image.enabled = true;
-					SubTitres.rid.not = masage;
-				}
-			}
-		} else {
-			deactivate.Invoke ();
-			not = 0;
-		}
-
-
-
-
-		if (sensor.activate) {
-			activate.Invoke ();
-			Cursor_Event.regit.curActiv = true;
-			activ = true;
-		} else {
-			return;
-		}
+		
 	}
 }

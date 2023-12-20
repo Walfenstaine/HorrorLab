@@ -5,12 +5,10 @@ using UnityEngine.UI;
 
 public class NoteRider : MonoBehaviour {
 	public Text text;
-	public GameObject image;
-	public bool activate{ get; set; }
-	public string not{ get; set; }
 	public static NoteRider regit {get; set;}
 
 	void Awake(){
+        Closed();
 		if (regit == null) {
 			regit = this;
 		} else {
@@ -20,15 +18,10 @@ public class NoteRider : MonoBehaviour {
 	void OnDestroy(){
 		regit = null;
 	}
-	public void Deleyted(){
-		activate = false;
-		Cursor_Event.regit.curActiv = false;
+	public void Noting(string not){
+        text.text = not;
 	}
 	public void Closed(){
-		activate = false;
-	}
-	void Update () {
-		image.SetActive (activate);
-		text.text = not; 
-	}
+        text.text = "";
+    }
 }

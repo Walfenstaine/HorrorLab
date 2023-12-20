@@ -3,66 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-
+using InstantGamesBridge;
 public class Passworder : MonoBehaviour {
-	public int number;
-	public int maxKeys;
-	public Button[] butt;
+    [SerializeField] private Language closed, opened;
+    public AudioClip des;
+    public UnityEvent pssOk;
+    public int pas_Ok;
+	public int password;
+	public int maxKeys = 3;
 	public Text displayText;
-	public GameObject panel;
 
-	public void Activate(){
-		panel.SetActive (true);
-		Cursor_Event.regit.curActiv = true;
-	}
-	public void DeActivate(){
-		panel.SetActive (false);
-		PssPanel.rec.activ = false;
-		Deselect ();
-	}
-
-	void Deselect(){
-		if (PssPanel.rec.activ) {
-			Cursor_Event.regit.curActiv = false;
-		}
-		PssPanel.rec.activ = false;
-		number = 0;
+	public void Deselect(){
+		password = 0;
 		displayText.text = "";
-	}
-	void Select(){
-		if (PssPanel.rec.activ) {
-			Cursor_Event.regit.curActiv = false;
-		}
-		PssPanel.rec.not = number;
-		if (PssPanel.rec.not == 0) {
-			PssPanel.rec.activ = false;
-		}
-	}
+        SoundPlayer.regit.Play(des);
 
-     void OnEnable(){
-		for (int i = 0; i < butt.Length; i++){
-			Add(i);
-		}
-		number = 0;
-		displayText.text = "";
+
 	}
-	 void OnDisable(){
-		for (int i = butt.Length - 1; i >=0; i--){
-			Remove(i);
-		}
-	}
-	void Add(int i){
-		butt[i].onClick.AddListener(delegate { Click(i);});
-	}
-	void Remove(int i){
-		butt[i].onClick.RemoveAllListeners();
-	}
-	void Click(int i){
-		if (displayText.text.Length >= maxKeys) {
-			OnDisable ();
-		} else {
-			number = 10 * number + i;
-			displayText.text = "" + number;
-		}
+    public void Select()
+    {
+        if (password == pas_Ok)
+        {
+            pssOk.Invoke();
+        }
+        else
+        {
+            Deselect();
+        }
+    }
+	public void Click(int i){
+        if (displayText.text.Length < maxKeys)
+        {
+            password = 10 * password + i;
+            displayText.text = "" + password;
+        }
+        else
+        {
+            Select();
+        }
 	}
 }

@@ -1,54 +1,70 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using InstantGamesBridge;
 public class DorOpener : MonoBehaviour {
-	public float timer = 3;
-	public string masage;
-	public string masageClose;
-	public GameObject kay;
-	public TriggerSensor key;
-	public AudioClip[] clips;
-	public Transform door;
-	public bool locked, open;
-	private Vector3 nap;
-	private string nam;
+    public AudioClip key, open, close;
+    [SerializeField] private Language closed, keyAd, opened;
+    public bool locked;
+    public Animator anim;
+    private bool isKay;
 
-	void Start () {
-		nap = transform.position - transform.right - transform.forward;
-	}
-	void OnTriggerEnter(Collider oser){
-		if (oser.tag == "Player") {
-			if (!locked) {
-				Destroy(GameObject.Find(nam));
-				if (kay != null) {
-					kay.SetActive (true);
-				}
-				open = true;
-				SubTitres.rid.image.enabled = true;
-				SubTitres.rid.not = masage;
-				SubTitres.rid.tim = timer;
-				SoundMaster.regit.clip = clips [0];
-				Destroy (this,1);
-				Destroy (GetComponent<BoxCollider>(),1);
-			} else {
-				SoundMaster.regit.clip = clips [1];
-				SubTitres.rid.image.enabled = true;
-				SubTitres.rid.not = masageClose;
-			}
-		}
-	}
-	void Update () {
-		if (key != null) {
-			if (key.activate) {
-				nam = key.name;
-				locked = false;
-				Destroy (key.gameObject);
-			}
-		} 
-		if (open) {
-			var lookder = nap - door.transform.position;
-			door.transform.rotation = Quaternion.Lerp (door.transform.rotation, Quaternion.LookRotation (lookder), 5 * Time.deltaTime);
-		}
-	}
+    public void AddKey()
+    {
+        if (Bridge.platform.language == "ru")
+        {
+            SubTitres.rid.MaSage(keyAd.ru);
+        }
+        else
+        {
+            SubTitres.rid.MaSage(keyAd.en);
+        }
+        isKay = true;
+        SoundPlayer.regit.Play(key);
+    }
+    public void UnLocked()
+    {
+        if (Bridge.platform.language == "ru")
+        {
+            SubTitres.rid.MaSage(opened.ru);
+        }
+        else
+        {
+            SubTitres.rid.MaSage(opened.en);
+        }
+        anim.SetBool("Open", false);
+        locked = false;
+    }
+    public void OpenDoor()
+    {
+        if (!locked)
+        {
+            anim.SetFloat("Speed", 0.8f);
+            SoundPlayer.regit.Play(open);
+        }
+        else
+        {
+            if (isKay)
+            {
+                anim.SetBool("Open", true);
+            }
+            else
+            {
+                SoundPlayer.regit.Play(close);
+                if (Bridge.platform.language == "ru")
+                {
+                    SubTitres.rid.MaSage(closed.ru);
+                }
+                else
+                {
+                    SubTitres.rid.MaSage(closed.en);
+                }
+            }
+        }
+    }
+    public void Dan()
+    {
+        anim.SetFloat("Speed", 0.0f);
+        Destroy(this);
+    }
 }

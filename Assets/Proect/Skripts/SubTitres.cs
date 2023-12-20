@@ -4,17 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SubTitres : MonoBehaviour {
-	public float tim { get; set; }
-	public Text text;
-	public Image image{ get; set; }
-	public string not{ get; set; }
+	public Text masage;
 	public static SubTitres rid {get; set;}
 	private float timer;
 
 	void Awake(){
-		timer = 0;
-		image = GetComponent<Image> ();
-		image.enabled = false;
 		if (rid == null) {
 			rid = this;
 		} else {
@@ -24,18 +18,20 @@ public class SubTitres : MonoBehaviour {
 	void OnDestroy(){
 		rid = null;
 	}
-
-	void Update () {
-		if (not != null) {
-			text.text = not;
-		} 
-		if (image.enabled) {
-			timer += Time.unscaledDeltaTime;
-		}
-		if (timer > tim) {
-			image.enabled = false;
-			timer = 0;
-			not = "";
-		}
-	}
+    public void Clear()
+    {
+        masage.text = "";
+    }
+    public void MaSage(string mas)
+    {
+        timer = Time.time + mas.Length/5;
+        masage.text = mas;
+    }
+    private void Update()
+    {
+        if (Time.time > timer)
+        {
+            Clear();
+        }
+    }
 }

@@ -2,14 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundPlay : MonoBehaviour {
-	public string masage;
-	public AudioClip clip;
-	void Start () {
-		SubTitres.rid.image.enabled = true;
-		SubTitres.rid.not = masage;
-		if (clip != null) {
-			SoundMaster.regit.clip = clip;
+public class SoundPlayer : MonoBehaviour {
+    public AudioSource sorse { get; set;}
+    public static SoundPlayer regit {get; set;}
+    private float tim;
+	void Awake(){
+		sorse = GetComponent<AudioSource> ();
+		if (regit == null) {
+			regit = this;
+		} else {
+			Destroy (this);
 		}
 	}
+	void OnDestroy(){
+		regit = null;
+	}
+    public void Play(AudioClip clip)
+    {
+        if (Time.timeScale > 0)
+        {
+            if (tim < Time.time)
+            {
+                tim = Time.time + 0.1f;
+                sorse.PlayOneShot(clip);
+            }
+        }
+        else
+        {
+            sorse.PlayOneShot(clip);
+        }
+    }
 }

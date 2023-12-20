@@ -3,23 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Footsteps : MonoBehaviour {
-	public AudioClip clip;
-	private CharacterController controller;
-	private float timer = 0;
-
-	void Start () {
-		controller = GetComponent<CharacterController> ();
-	}
-
-	void Update () {
-		if (controller.velocity.magnitude > 0.1f) {
-			timer += controller.velocity.magnitude * Time.deltaTime;
-		} else {
-			timer = 0;
-		}
-		if (timer > 3) {
-			SoundMaster.regit.clip = clip;
-			timer = 0;
-		}
-	}
+	public AudioClip[] clip;
+    public void Step()
+    {
+        int num = Random.Range(0, clip.Length-1);
+        SoundPlayer.regit.sorse.PlayOneShot(clip[num],0.08f);
+    }
 }

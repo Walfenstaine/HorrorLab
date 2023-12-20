@@ -1,20 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using InstantGamesBridge;
 
 public class NoteSkript : MonoBehaviour {
-	public string text;
-	private TriggerSensor sensor;
+    [SerializeField] private Language language;
 
-	void Start () {
-		sensor = GetComponent<TriggerSensor> ();
-	}
-
-	void Update () {
-		if (sensor.activate) {
-			NoteRider.regit.activate = true;
-			Cursor_Event.regit.curActiv = true;
-			NoteRider.regit.not = text;
-		}
-	}
+    public void Rider()
+    {
+        if (Bridge.platform.language == "ru")
+        {
+            NoteRider.regit.Noting(language.ru);
+        }
+        else
+        {
+            NoteRider.regit.Noting(language.en);
+        }
+    }
 }

@@ -18,36 +18,6 @@ public class Elschid : MonoBehaviour {
 	}
 
 	void Update () {
-		for (int i = 0; i < invens.Length; i++) {
-			if (invens [i].activate) {
-				names [i] = invens [i].name;
-				isTool [i] = true;
-				invens [i].gameObject.SetActive (false);
-			}
-		}
-		if (sensor != null) {
-			for (int i = 0; i < isTool.Length; i++) {
-				if (isTool [i] == true) {
-					cranc.oKay = true;
-				} else {
-					cranc.oKay = false;
-				}
-			}
-			if (sensor.activate) {
-				for (int i = 0; i < tools.Length; i++) {
-					tools [i].SetActive (isTool [i]);
-					Destroy (GameObject.Find (names [i]));
-				}
-				if (cranc.oKay) {
-					SubTitres.rid.image.enabled = true;
-					SubTitres.rid.not = masage;
-					SubTitres.rid.tim = timer;
-				} else {
-					SubTitres.rid.image.enabled = true;
-					SubTitres.rid.not = worning;
-					SubTitres.rid.tim = timer;
-				}
-			}
-		}
+		
 	}
 }

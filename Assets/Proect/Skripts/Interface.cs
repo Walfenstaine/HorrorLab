@@ -7,7 +7,7 @@ using InstantGamesBridge;
 
 public class Interface : MonoBehaviour
 {
-    public UnityEvent gameer, pause, gameOver, note, password;
+    public UnityEvent gameer, pause, gameOver, note, password, inventar;
     public static Interface rid { get; set; }
     void Awake()
     {
@@ -32,6 +32,12 @@ public class Interface : MonoBehaviour
     {
         CursorEvent(true);
         pause.Invoke();
+        Time.timeScale = 0;
+    }
+    public void Inventar()
+    {
+        CursorEvent(true);
+        inventar.Invoke();
         Time.timeScale = 0;
     }
     public void Game()

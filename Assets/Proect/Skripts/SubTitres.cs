@@ -24,7 +24,7 @@ public class SubTitres : MonoBehaviour {
     }
     public void MaSage(string mas)
     {
-        timer = Time.time + mas.Length/5;
+        timer = Time.time + mas.Length/3;
         masage.text = mas;
     }
     private void Update()

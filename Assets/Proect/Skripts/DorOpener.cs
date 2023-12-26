@@ -3,37 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using InstantGamesBridge;
 public class DorOpener : MonoBehaviour {
-    public AudioClip key, open, close;
-    [SerializeField] private Language closed, keyAd, opened;
+    public int index;
+    public AudioClip open, close;
+    [SerializeField] private Language opened;
     public bool locked;
     public Animator anim;
-    private bool isKay;
 
-    public void AddKey()
+    public void OnEventer()
     {
-        if (Bridge.platform.language == "ru")
-        {
-            SubTitres.rid.MaSage(keyAd.ru);
-        }
-        else
-        {
-            SubTitres.rid.MaSage(keyAd.en);
-        }
-        isKay = true;
-        SoundPlayer.regit.Play(key);
+        Inventar.rid.index = index;
+        InvPredmet.clic += UnLocked;
     }
-    public void UnLocked()
+    public void OffEventer()
     {
-        if (Bridge.platform.language == "ru")
+        InvPredmet.clic -= UnLocked;
+    }
+    public void UnLocked(int indexer)
+    {
+        if (index == indexer)
         {
-            SubTitres.rid.MaSage(opened.ru);
+            anim.SetFloat("Speed", 0.8f);
+            SoundPlayer.regit.Play(open);
         }
         else
         {
-            SubTitres.rid.MaSage(opened.en);
+            SoundPlayer.regit.Play(close);
         }
-        anim.SetBool("Open", false);
-        locked = false;
     }
     public void OpenDoor()
     {
@@ -44,26 +39,19 @@ public class DorOpener : MonoBehaviour {
         }
         else
         {
-            if (isKay)
-            {
-                anim.SetBool("Open", true);
-            }
-            else
-            {
-                SoundPlayer.regit.Play(close);
-                if (Bridge.platform.language == "ru")
-                {
-                    SubTitres.rid.MaSage(closed.ru);
-                }
-                else
-                {
-                    SubTitres.rid.MaSage(closed.en);
-                }
-            }
+            Interface.rid.Inventar();
         }
     }
     public void Dan()
     {
+        if (Bridge.platform.language == "ru")
+        {
+            SubTitres.rid.MaSage(opened.ru);
+        }
+        else
+        {
+            SubTitres.rid.MaSage(opened.en);
+        }
         anim.SetFloat("Speed", 0.0f);
         Destroy(this);
     }

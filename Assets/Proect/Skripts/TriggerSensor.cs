@@ -5,11 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class TriggerSensor : MonoBehaviour {
-	public float spector = 20;
+	
 	public Transform cam;
-    public UnityEvent touch;
+    public UnityEvent touch, resed;
 
-	private bool activ;
+    private float spector = 20;
+    private bool activ;
 	private float vzglyad;
 
 	void Start(){
@@ -33,6 +34,7 @@ public class TriggerSensor : MonoBehaviour {
 	void OnTriggerExit(Collider oser){
 		if (oser.tag == "Player") {
 			activ = false;
+            resed.Invoke();
 		}
 	}
 }

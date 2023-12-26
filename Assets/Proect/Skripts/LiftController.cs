@@ -1,25 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LiftController : MonoBehaviour {
-	public string level;
-	public AudioClip clip;
-	public TriggerSensor opene, closer, deactiveter;
-	public bool open;
-	public Transform dorl, dorr;
-	private Vector3 l, r;
-	public float timer;
-	private bool run;
-	void Start () {
-	
-	}
-	public void LiftMuve(){
-	
-	}
+    public Animator anim;
+	public AudioClip clip, run;
 
-	void Update () {
-		
+	public void LiftOpen(bool open){
+        anim.SetBool("Open", open);
 	}
+    public void Open()
+    {
+        SoundPlayer.regit.Play(clip);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            LiftOpen(false);
+            anim.SetBool("Run", true);
+        }
+    }
+    public void Run()
+    {
+        SoundPlayer.regit.Play(run);
+    }
+    public void And()
+    {
+        LavelAnd.rid.And();
+    }
 }

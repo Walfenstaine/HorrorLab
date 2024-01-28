@@ -2,32 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 using InstantGamesBridge;
+using UnityEngine.Events;
+
 public class DorOpener : MonoBehaviour {
     public int index;
-    public AudioClip open, close;
-    [SerializeField] private Language opened;
+    public TriggerSensor sensor;
+    public AudioClip open;
+    [SerializeField] private Language opened, closed;
     public bool locked;
     public Animator anim;
-
+    public UnityEvent forOpen;
     public void OnEventer()
     {
         Inventar.rid.index = index;
         InvPredmet.clic += UnLocked;
+        Passworder.passwordIn += UnLocked;
     }
     public void OffEventer()
     {
         InvPredmet.clic -= UnLocked;
+        Passworder.passwordIn -= UnLocked;
+    }
+    public void PlOpen()
+    {
+        SoundPlayer.regit.Play(open,1);
+        forOpen.Invoke();
     }
     public void UnLocked(int indexer)
     {
         if (index == indexer)
         {
             anim.SetFloat("Speed", 0.8f);
-            SoundPlayer.regit.Play(open);
         }
         else
         {
-            SoundPlayer.regit.Play(close);
+            if (Bridge.platform.language == "ru")
+            {
+                SubTitres.rid.MaSage(closed.ru);
+            }
+            else
+            {
+                SubTitres.rid.MaSage(closed.en);
+            }
         }
     }
     public void OpenDoor()
@@ -35,7 +51,15 @@ public class DorOpener : MonoBehaviour {
         if (!locked)
         {
             anim.SetFloat("Speed", 0.8f);
-            SoundPlayer.regit.Play(open);
+            SoundPlayer.regit.Play(open,1);
+            if (Bridge.platform.language == "ru")
+            {
+                SubTitres.rid.MaSage(opened.ru);
+            }
+            else
+            {
+                SubTitres.rid.MaSage(opened.en);
+            }
         }
         else
         {
@@ -44,15 +68,22 @@ public class DorOpener : MonoBehaviour {
     }
     public void Dan()
     {
-        if (Bridge.platform.language == "ru")
+        if (!locked)
         {
-            SubTitres.rid.MaSage(opened.ru);
+            if (Bridge.platform.language == "ru")
+            {
+                SubTitres.rid.MaSage(opened.ru);
+            }
+            else
+            {
+                SubTitres.rid.MaSage(opened.en);
+            }
         }
-        else
-        {
-            SubTitres.rid.MaSage(opened.en);
-        }
+        
         anim.SetFloat("Speed", 0.0f);
         Destroy(this);
+        Passworder.passwordIn -= UnLocked;
+        forOpen.Invoke();
+        Destroy(sensor);
     }
 }

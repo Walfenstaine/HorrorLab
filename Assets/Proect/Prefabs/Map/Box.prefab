@@ -225,12 +225,13 @@ GameObject:
   - component: {fileID: 7124739166576818034}
   - component: {fileID: 7982410886128815880}
   - component: {fileID: 539852199499392343}
+  - component: {fileID: 1731756284378659469}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5789918158583360482
 Transform:
@@ -241,13 +242,13 @@ Transform:
   m_GameObject: {fileID: 5467914032264920470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.82, y: 0, z: 0.019487193}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.6999999, y: 0.7, z: 0.6999999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8484492476515216924}
   - {fileID: 4852384939437781021}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &105726666114795741
 MeshFilter:
@@ -361,7 +362,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5990769, y: 1.3496065, z: 2.0521452}
+  m_Size: {x: 1.5990769, y: 1.3496065, z: 1.2391999}
   m_Center: {x: -1.0629678, y: 1.5081054, z: 0}
 --- !u!114 &539852199499392343
 MonoBehaviour:
@@ -375,4 +376,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded132d945392e049b6582704dacdc55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 6f08cf75d2c20b946839e260678f0da1, type: 3}
   anim: {fileID: 7124739166576818034}
+--- !u!208 &1731756284378659469
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467914032264920470}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1, y: 1.5000001, z: 1.026}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.4, y: 1.5000001, z: 0}
+  m_TimeToStationary: 0.5

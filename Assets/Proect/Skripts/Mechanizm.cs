@@ -31,7 +31,7 @@ public void UnLocked(int indexer)
             Inventar.rid.index = index[i];
             tool[i].SetActive(true);
             lamp[i].Click(true);
-            SoundPlayer.regit.Play(open);
+            SoundPlayer.regit.Play(open,1);
                 if (num < tool.Length-1)
                 {
                     num += 1;
@@ -57,7 +57,7 @@ public void OpenDoor()
 public void Dan()
 {
     anim.SetFloat("Speed", 0.0f);
-    SoundPlayer.regit.Play(close);
+    SoundPlayer.regit.Play(close,1);
     Destroy(this);
         touch.Invoke();
     }

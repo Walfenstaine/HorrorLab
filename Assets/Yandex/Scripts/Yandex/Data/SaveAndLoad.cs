@@ -16,7 +16,7 @@ public struct OnLoadIsComplete : IEvent
 public class SaveAndLoad : MonoBehaviour
 {
     public static SaveAndLoad Instance { get; private set; }
-
+    public GameObject resume;
     [SerializeField] private Data myData;
     [SerializeField] private string id;
 
@@ -68,14 +68,11 @@ public class SaveAndLoad : MonoBehaviour
 
     void SetInitValue()
     {
-        myData.pl_Helse = 1;
-        myData.pl_Atak = 1;
-        myData.pl_Fortune = 1;
-        myData.coins = 100;
+        Destroy(resume);
         myData.record = 0;
-        myData.bulets = 20;
         myData.soundOn = true;
-        myData.sens = 0.5f;
+        myData.m_Intensity = 0.5f;
+        myData.level = "Scene1";
     }
 
 

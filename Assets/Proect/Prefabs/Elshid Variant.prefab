@@ -382,7 +382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2fe6f3edb4d1b44af05749969f17f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
   touch:
     m_PersistentCalls:
       m_Calls:
@@ -425,6 +424,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  imgIndex: 3
 --- !u!114 &8625205807715592472
 MonoBehaviour:
   m_ObjectHideFlags: 0

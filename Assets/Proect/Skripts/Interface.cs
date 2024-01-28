@@ -7,7 +7,7 @@ using InstantGamesBridge;
 
 public class Interface : MonoBehaviour
 {
-    public UnityEvent gameer, pause, gameOver, note, password, inventar;
+    public UnityEvent gameer, pause, gameOver, note, password, inventar, cutScene;
     public static Interface rid { get; set; }
     void Awake()
     {
@@ -42,15 +42,23 @@ public class Interface : MonoBehaviour
     }
     public void Game()
     {
+        Muwer.rid.controller.enabled = true;
         CursorEvent(false);
         gameer.Invoke();
-        Time.timeScale = 1; 
+        Time.timeScale = 1;
+        //SaveAndLoad.Instance.Save();
     }
 
     public void GamOver()
     {
+        Muwer.rid.controller.enabled = false;
         gameOver.Invoke();
         Time.timeScale = 0;
+        CursorEvent(true);
+    }
+    public void CutScene()
+    {
+        cutScene.Invoke();
         CursorEvent(true);
     }
     public void Note()
@@ -70,14 +78,17 @@ public class Interface : MonoBehaviour
         Muwer.rid.muve = Vector3.zero;
         Muwer.rid.rute = Vector2.zero;
         SubTitres.rid.Clear();
-        if (activ)
+        if (Bridge.device.type == InstantGamesBridge.Modules.Device.DeviceType.Desktop)
         {
-            Cursor.lockState = CursorLockMode.None;
+            if (activ)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            Cursor.visible = activ;
         }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        Cursor.visible = activ;
     }
 }

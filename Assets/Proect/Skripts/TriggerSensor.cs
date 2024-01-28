@@ -6,10 +6,10 @@ using UnityEngine.Events;
 
 public class TriggerSensor : MonoBehaviour {
 	
-	public Transform cam;
+	private Transform cam;
     public UnityEvent touch, resed;
-
-    private float spector = 20;
+    public int imgIndex;
+    public float spector = 20;
     private bool activ;
 	private float vzglyad;
 
@@ -23,18 +23,21 @@ public class TriggerSensor : MonoBehaviour {
 			if (vzglyad <= spector) {
 				activ = false;
                 touch.Invoke();
-			}
+                IMG.rid.ImgOn(0);
+            }
 		} 
 	}
 	void OnTriggerEnter(Collider oser){
 		if (oser.tag == "Player") {
 			activ = true;
+            IMG.rid.ImgOn(imgIndex);
 		}
 	}
 	void OnTriggerExit(Collider oser){
 		if (oser.tag == "Player") {
 			activ = false;
             resed.Invoke();
-		}
+            IMG.rid.ImgOn(0);
+        }
 	}
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 114976738286975086}
   - component: {fileID: 5011289640027734374}
   - component: {fileID: 8823434716366394893}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 4480170133885523209}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!143 &143940051384722444
 CharacterController:
@@ -94,7 +94,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip:
-  - {fileID: 8300000, guid: e30c10b85b1621f478a8b77f2a10451b, type: 3}
+  - {fileID: 8300000, guid: df0da8194d0f263449cfc853af815e08, type: 3}
+  - {fileID: 8300000, guid: 34a1d8a7f16b66445ba514d763ee20a4, type: 3}
+  - {fileID: 8300000, guid: 267096f2480b99444ba6da275255b885, type: 3}
 --- !u!95 &8823434716366394893
 Animator:
   serializedVersion: 5
@@ -183,7 +185,7 @@ Camera:
     width: 1
     height: 1.4
   near clip plane: 0.05
-  far clip plane: 40
+  far clip plane: 30
   field of view: 60
   orthographic: 0
   orthographic size: 5

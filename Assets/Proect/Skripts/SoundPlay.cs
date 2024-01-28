@@ -17,19 +17,19 @@ public class SoundPlayer : MonoBehaviour {
 	void OnDestroy(){
 		regit = null;
 	}
-    public void Play(AudioClip clip)
+    public void Play(AudioClip clip, float volume)
     {
         if (Time.timeScale > 0)
         {
             if (tim < Time.time)
             {
                 tim = Time.time + 0.1f;
-                sorse.PlayOneShot(clip);
+                sorse.PlayOneShot(clip, volume);
             }
         }
         else
         {
-            sorse.PlayOneShot(clip);
+            sorse.PlayOneShot(clip, volume);
         }
     }
 }

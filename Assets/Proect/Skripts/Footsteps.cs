@@ -7,6 +7,11 @@ public class Footsteps : MonoBehaviour {
     public void Step()
     {
         int num = Random.Range(0, clip.Length-1);
-        SoundPlayer.regit.sorse.PlayOneShot(clip[num],0.08f);
+        float volum = Vector3.Distance(transform.position, Camera.main.transform.position);
+        if (volum < 15.0f)
+        {
+            SoundPlayer.regit.sorse.PlayOneShot(clip[num], (15-volum) / 15);
+        }
+        
     }
 }

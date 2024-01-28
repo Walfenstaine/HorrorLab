@@ -13,10 +13,9 @@ public class Muwer : MonoBehaviour {
     public Animator anim;
 	private Vector3 moveDirection = Vector3.zero;
 	float rotationY = 0F;
-	private CharacterController controller;
-	public bool busted{get; set;}
+	public CharacterController controller { get; set; }
 	public static Muwer rid {get; set;}
-
+    private Vector3 pos;
 	void Awake(){
 		if (rid == null) {
 			rid = this;
@@ -30,11 +29,14 @@ public class Muwer : MonoBehaviour {
 
 	void Start () {
 		controller = GetComponent<CharacterController>();
+        pos = transform.position;
 	}
-
+    public void Restarter()
+    {
+        transform.position = pos;
+    }
 	void Update() {
-		if (!busted) {
-			transform.parent = null;
+		if (controller.enabled) {
 			if (cam != null) {
 				if (Time.timeScale > 0) {
 					float rotationX = transform.localEulerAngles.y + rute.x * sensitivity;
@@ -64,9 +66,6 @@ public class Muwer : MonoBehaviour {
 			}
 
 			controller.Move (moveDirection * Time.deltaTime);
-		} else {
-			cam.localEulerAngles = Vector3.Lerp(cam.localEulerAngles, new Vector3(0,0,0), Time.deltaTime);
-			rotationY = 0;
-		}
+		} 
 	}
 }

@@ -3,33 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using InstantGamesBridge;
+using System;
 public class Passworder : MonoBehaviour {
-    [SerializeField] private Language closed, opened;
-    public AudioClip des;
-    public UnityEvent pssOk;
-    public int pas_Ok;
 	public int password;
 	public int maxKeys = 3;
 	public Text displayText;
-
-	public void Deselect(){
-		password = 0;
+    public static event Action<int> passwordIn;
+    public void Deselect(){
+        password = 0;
 		displayText.text = "";
-        SoundPlayer.regit.Play(des);
-
-
 	}
     public void Select()
     {
-        if (password == pas_Ok)
-        {
-            pssOk.Invoke();
-        }
-        else
-        {
-            Deselect();
-        }
+        Interface.rid.Game();
+        passwordIn.Invoke(password);
+        Deselect();
     }
 	public void Click(int i){
         if (displayText.text.Length < maxKeys)

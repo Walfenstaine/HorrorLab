@@ -24,6 +24,7 @@ public class Predmet : MonoBehaviour
             SubTitres.rid.MaSage(text.en);
         }
         Instantiate(predmet, Vector3.zero, Quaternion.identity);
-        SoundPlayer.regit.Play(clip);
+        SoundPlayer.regit.Play(clip,1);
+        Destroy(gameObject);
     }
 }

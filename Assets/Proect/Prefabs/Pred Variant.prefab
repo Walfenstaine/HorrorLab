@@ -106,8 +106,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
-  m_Center: {x: -0.3, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2809296422754326747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f2fe6f3edb4d1b44af05749969f17f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
   touch:
     m_PersistentCalls:
       m_Calls:
@@ -151,6 +150,7 @@ MonoBehaviour:
   resed:
     m_PersistentCalls:
       m_Calls: []
+  imgIndex: 2
 --- !u!114 &5221535702615334631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,5 +166,5 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: 613dde4f8d7a7784680c51edf0b7c176, type: 3}
   sprite: {fileID: 21300000, guid: e208356d5ca101443905e7a54182b861, type: 3}
   text: {fileID: 11400000, guid: 35bcc318a6b8e6342b27a2b5f77c42f0, type: 2}
-  index: 2
+  index: 0
   predmet: {fileID: 4619072026270674241, guid: 9f02d5ecccb58c744904785683a213be, type: 3}

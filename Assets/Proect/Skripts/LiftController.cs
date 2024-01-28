@@ -11,7 +11,7 @@ public class LiftController : MonoBehaviour {
 	}
     public void Open()
     {
-        SoundPlayer.regit.Play(clip);
+        SoundPlayer.regit.Play(clip,1);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -23,7 +23,12 @@ public class LiftController : MonoBehaviour {
     }
     public void Run()
     {
-        SoundPlayer.regit.Play(run);
+        float dis = Vector3.Distance(transform.position, Muwer.rid.transform.position);
+        if (dis <= 7)
+        {
+            SoundPlayer.regit.Play(run, 1);
+        }
+       
     }
     public void And()
     {
